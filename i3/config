@@ -14,6 +14,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 10
+#font pango:Godzilla 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -43,10 +44,11 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ograve focus right
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+h focus left
+#bindsym $mod+h focus left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -67,7 +69,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+z split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -112,11 +114,11 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to $workspace1
-bindsym $mod+Shift+2 move container to $workspace2
-bindsym $mod+Shift+3 move container to $workspace3
-bindsym $mod+Shift+4 move container to $workspace4
-bindsym $mod+Shift+5 move container to $workspace5
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -166,7 +168,8 @@ bindsym $mod+r mode "resize"
 # nmapllet always started
 exec --no-startup-id nm-applet
 exec --no-startup-id ulauncher 
-exec --no-startup-id feh --bg-scale /home/pitta/Immagini/qui_niente.jpg 
+#exec --no-startup-id feh --bg-scale /home/pitta/Immagini/qui_niente.jpg 
+exec --no-startup-id feh --bg-scale /home/pitta/Immagini/GodzillaWallpaper.jpg
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -208,9 +211,13 @@ exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
 
 # Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
 exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+#fix for application that require sudo privileges install before policykit-desktop-privileges and policykit-1-gnome
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 #firefox to wokspace 2
-assign [class="Gnome-terminal"] $workspace1
-assign [class="Firefox"] $workspace2
-assign [class="Skype"] $workspace3
-assign [class="Mailspring"] $workspace4
-assign [class="Auryo"] $workspace5
+#assign [class="Gnome-terminal"] $workspace1
+#assign [class="Firefox"] $workspace2
+#assign [class="Skype"] $workspace3
+#assign [class="Mailspring"] $workspace4
+#assign [class="Auryo"] $workspace5
+#SECOND SCREEN
+
