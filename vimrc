@@ -35,3 +35,4 @@ set splitright
 set dictionary+=/usr/share/dict/british-english
 "always higlight search
 set hlsearch
+set title
