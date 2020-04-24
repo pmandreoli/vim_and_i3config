@@ -60,7 +60,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ograve move right
+bindsym $mod+Shift+h move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -69,10 +69,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+z split h
+bindsym $mod+e split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+o split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -80,7 +80,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -167,9 +167,10 @@ bindsym $mod+r mode "resize"
 ##
 # nmapllet always started
 exec --no-startup-id nm-applet
-exec --no-startup-id ulauncher 
-#exec --no-startup-id feh --bg-scale /home/pitta/Immagini/qui_niente.jpg 
-exec --no-startup-id feh --bg-scale /home/pitta/Immagini/GodzillaWallpaper.jpg
+exec --no-startup-id blueman-applet
+exec --no-startup-id ulauncher --no-window-shadow 
+exec --no-startup-id feh --bg-fill /home/pitta/Immagini/star-wars-backgrounds-18.jpg  
+#exec --no-startup-id DISPLAY=:0.0 feh --bg-scale /home/pitta/Immagini/GodzillaWallpaper.jpg
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -223,3 +224,11 @@ exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agen
 #assign [class="Auryo"] $workspace5
 #SECOND SCREEN
 exec --no-startup-id bash /home/pitta/.config/i3/SecondScreen.sh
+#scrennshots
+#normal
+bindsym --release Print exec "scrot -m '/home/pitta/Immaginiscreenshots/%s_%H%M_%d.%m.%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
+#selection
+bindsym --release Shift+Print exec "scrot -s '/home/pitta/Immagini/screenshots/%s_%H%M_%d%m%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
+#window
+bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/pitta/Immagini/screenshots/%s_%H%M_%d%m%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
+
