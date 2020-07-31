@@ -37,18 +37,18 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym ctrl+space exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
+bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-bindsym $mod+h focus left
-#bindsym $mod+h focus left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -57,10 +57,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+h move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -69,10 +69,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+e split h
+bindsym $mod+i split h
 
 # split in vertical orientation
-bindsym $mod+o split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -80,7 +80,7 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-#bindsym $mod+e layout toggle split
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -99,6 +99,7 @@ set $workspace2 "2:WEB   "
 set $workspace3 "3:CHAT   "
 set $workspace4 "4:EMAIL   "
 set $workspace5 "5:SOUND   "
+set $workspace6 "6:NOTES  "
 # switch to workspace
 #bindsym $mod+1 workspace 1
 bindsym $mod+1 workspace $workspace1
@@ -107,7 +108,7 @@ bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace 6
+bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -119,7 +120,7 @@ bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -140,10 +141,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym ograve resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -154,6 +155,7 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -168,16 +170,20 @@ bindsym $mod+r mode "resize"
 # nmapllet always started
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
-exec --no-startup-id ulauncher --no-window-shadow 
-exec --no-startup-id feh --bg-fill /home/pitta/Immagini/star-wars-backgrounds-18.jpg  
+exec --no-startup-id feh --bg-fill /home/pitta/Immagini/desktop_qui_niente.png 
 #exec --no-startup-id DISPLAY=:0.0 feh --bg-scale /home/pitta/Immagini/GodzillaWallpaper.jpg
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle -q
+#i3status-conf-volume
+#bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+#bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+#bindsym XF86AudioMute exec amixer -D pulse sset Master toggle -q
+# change volume or toggle mute i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 
 # Sreen brightness controls
@@ -195,19 +201,23 @@ bindsym XF86AudioPrev exec playerctl previous
 
 #Workspaces
 
-##COLORI
+#COLORI
 bar {
  colors {
         background #32302f
         statusline #39ff149 #that neon blue
         separator #fb4934
 
-        focused_workspace  #4c7899 #285577 #ffffff
-        active_workspace   #076678 #5f676a #ffffff
+        #focused_workspace  #4c7899 #285577 #ffffff
+        focused_workspace  #228B22  #228B22 #ffffff
+        #active_workspace   #076678 #5f676a #ffffff
+        active_workspace   #228B22 #228B22 #ffffff
         inactive_workspace #333333 #222222 #888888
         urgent_workspace   #2f343a #900000 #ffffff
     }
-        status_command i3status -c ~/.config/i3status/i3status.conf
+#        status_command i3status -c ~/.config/i3status/i3status.conf
+         status_command i3blocks -c ~/.config/i3blocks/config
+
 }
 # Restore GNOME's settings
 exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
@@ -230,5 +240,37 @@ bindsym --release Print exec "scrot -m '/home/pitta/Immaginiscreenshots/%s_%H%M_
 #selection
 bindsym --release Shift+Print exec "scrot -s '/home/pitta/Immagini/screenshots/%s_%H%M_%d%m%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
 #window
-bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/pitta/Immagini/screenshots/%s_%H%M_%d%m%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
+#bindsym --release $mod+Shift+Print exec "scrot -u -d 4 '/home/pitta/Immagini/screenshots/%s_%H%M_%d%m%Y_$wx$h.png' ; aplay --quiet /usr/share/sounds/alsa/camera-shutter-click-01.wav"
+#move workspace to output left
+#bindsym $mod+m move workspace to output left
+#new keyboard
+#exec "setxkbmap -layout us,it"
+#exec "setxkbmap -option 'grp:alt_shift_toggle'"
+exec_always --no-startup-id "setxkbmap -layout us,us -variant ,intl -option grp:alt_shift_toggle"
+exec_always --no-startup-id "greenclip daemon"
+#cmus
 
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+
+# The middle button and a modifer over any part of the window kills the window
+bindsym --whole-window $mod+button2 kill
+
+# The right button toggles floating
+bindsym button3 floating toggle
+bindsym $mod+button3 floating toggle
+
+# The side buttons move the window around
+bindsym button9 move left
+bindsym button8 move right
+#
+for_window [title="Microsoft Teams Notification" class="microsoft teams - preview"] floating enable
+
+for_window [title="Microsoft Teams Notification" class="Microsoft Teams - Preview"] floating enable 
+
+# eliminate the title from tabs and get more space.
+#for_window [class="^.*"] border pixel 4
+client.focused #555555 #555555 #ffffff #4c7899 #10eb18
+#bindsym $mod+q exec "rofi -show drun -sidebar-mode -terminal terminator -color-window '#000000, #000000, #000000' -color-normal '#000000, #b3e774, #000000, #b3e774, #000000' -color-active '#000000, #b3e774, #000000, #b3e774, #000000' -color-urgent '#000000, #b3e774, #000000, #b3e774, #000000'"
+#bindsym $mod+n exec "bash -i /home/pitta/rofi-gpaste.sh"
+#bindsym $mod+q exec --no-startup-id "/home/pitta/Scaricati/.software/dmenu-extended/scripts/dmenu_extended_run" 

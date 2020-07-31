@@ -1,3 +1,8 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'LukeGoodsell/nextflow-vim'
@@ -24,6 +29,7 @@ let g:lightline = {
 
 
 set path+=**
+set nowrap
 set wildmenu
 colorscheme gruvbox
 set background=dark    " Setting dark mode
@@ -36,3 +42,4 @@ set dictionary+=/usr/share/dict/british-english
 "always higlight search
 set hlsearch
 set title
+set cursorbind
